@@ -1,0 +1,161 @@
+     ===========================  Welcome To Data Digger Quaries ===========================
+
+
+----- 1️⃣ Customers Table
+
+- CREATE DATABASE pr_1;
+
+
+- CREATE TABLE customers (
+    customer_id INT PRIMARY KEY,
+    Name VARCHAR(50),
+    Email VARCHAR(50),
+    Address VARCHAR(100)
+);
+
+
+-  INSERT INTO customers (customer_id, Name, Email, Address)
+ VALUES
+(1, 'John Smith', 'john.smith@gmail.com', 'New York, USA'),
+(2, 'Emily Johnson', 'emily.johnson@gmail.com', 'Los Angeles, USA'),
+(3, 'Michael Brown', 'michael.brown@gmail.com', 'Chicago, USA'),
+(4, 'Alice Davis', 'sophia.davis@gmail.com', 'Houston, USA'),
+(5, 'Daniel Wilson', 'daniel.wilson@gmail.com', 'San Francisco, USA');
+
+
+- SELECT * FROM `customers` ;
+
+
+- UPDATE customers
+SET Address = '503,germany'
+WHERE Name = 'Alice Davis';
+
+
+- DELETE FROM customers WHERE customer_id = 1;
+
+
+- SELECT * FROM `customers` 
+  WHERE Name = 'Alice Davis';
+
+
+----- 2️⃣ Orders Table
+
+
+- CREATE TABLE orders (
+    order_id INT PRIMARY KEY,
+    customer_id INT,
+    order_date DATE,
+    TotalAmount DECIMAL(10,2),
+    FOREIGN KEY (customer_id) REFERENCES customers(customer_id)
+);
+
+
+- INSERT INTO orders
+VALUES
+(101, 5, '2024-01-10', 250.50),
+(102, 2, '2024-01-12', 1200.00),
+(103, 3, '2024-01-15', 450.75),
+(104, 4, '2024-01-18', 899.99),
+(105, 5, '2024-01-20', 150.00);
+
+
+- SELECT * FROM `orders` WHERE customer_id = 4;
+
+
+- UPDATE orders
+SET TotalAmount = 1600.04
+WHERE order_id = 105;
+
+
+- DELETE FROM orders WHERE order_id = 101;
+
+
+- SELECT * FROM orders 
+WHERE order_date > '2023-12-1' ;
+
+
+- SELECT MAX(TotalAmount) AS Highest_order FROM orders;
+
+SELECT MIN(TotalAmount) AS Lowest_order FROM orders;
+
+SELECT AVG(TotalAmount) AS Average_order FROM orders;
+
+
+----- 3️⃣ Products Table
+
+
+- CREATE TABLE products (
+    product_id INT PRIMARY KEY,
+    product_name VARCHAR(50),
+    price DECIMAL(10,2),
+    stock INT
+);
+
+
+
+- INSERT INTO products (product_id, product_name, price, stock)
+VALUES
+(1, 'Laptop', 65000.00, 0),
+(2, 'Smartphone', 30000.00, 25),
+(3, 'Headphones', 2500.00, 50),
+(4, 'Keyboard', 1500.00, 40),
+(5, 'Mouse', 800.00, 60);
+
+
+- SELECT * FROM products
+ORDER BY price DESC;
+
+
+- UPDATE products
+SET price = 16000
+WHERE product_name = 'Laptop';
+
+
+- DELETE FROM products WHERE stock = 0
+
+
+- SELECT * FROM products
+WHERE price BETWEEN 500 AND 2000;
+
+- SELECT MAX(price) AS Most_Expensive FROM products;
+
+SELECT MIN(price) AS Chepest_Expensive FROM products;
+
+
+----- 4️⃣ OrderDetail Table
+
+
+- CREATE TABLE order_details(
+     orderDetails_id INT PRIMARY KEY, 
+     order_id INT, 
+     product_id INT, 
+     Quantity INT, 
+     SubTotal DECIMAL(10,2),
+     FOREIGN KEY (order_id) REFERENCES orders (order_id),
+     FOREIGN KEY (product_id) REFERENCES products (product_id)
+ );
+
+- INSERT INTO order_details (orderDetails_id, order_id, product_id, Quantity, SubTotal)
+VALUES
+(1, 104, 3, 1, 130000.00),
+(2, 102, 2, 5, 2500.00),
+(3, 103, 3, 6, 30000.00),
+(4, 104, 4, 2, 3000.00),
+(5, 105, 5, 3, 2400.00);
+
+
+- SELECT * FROM order_details WHERE order_id = 103; 
+
+
+- SELECT SUM(SubTotal) AS TotalRevenue FROM order_details;
+
+- SELECT product_id, 
+    SUM(Quantity) AS TotalQuantity
+    FROM order_details
+    GROUP BY product_id
+    ORDER BY TotalQuantity DESC
+    LIMIT 3;
+
+
+- SELECT COUNT(*) AS orderCount FROM order_details
+    WHERE product_id = 2;
