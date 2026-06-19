@@ -662,18 +662,7 @@ Feel free to extend this project by adding:
 - Triggers for automation
 - Views for common queries
 
----
-
-## 📞 Support
-
-For questions or issues, please refer to the SQL documentation or open an issue in the repository.
 
 ---
 
-## ⭐ If you found this helpful, please star the repository!
 
-**Created with ❤️ for SQL Enthusiasts**
-
----
-
-*Last Updated: June 2026*
