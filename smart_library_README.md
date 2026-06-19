@@ -661,8 +661,7 @@ Feel free to extend this project by adding:
 - Stored procedures
 - Triggers for automation
 - Views for common queries
-
-
+- 
 ---
 
 
