@@ -1,7 +1,6 @@
 # 📚 Smart Library Management System
 
 > A comprehensive SQL database project for managing library operations including books, authors, members, and transactions with advanced queries and analytics.
-
 ---
 
 ## 🎯 Table of Contents
